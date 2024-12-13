@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Go Out With Me?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        .question {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 2rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .buttons {
+            position: relative;
+        }
+
+        button {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: transform 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        #yes {
+            background-color: #ff5f5d;
+            color: white;
+        }
+
+        #no {
+            background-color: #fff;
+            color: black;
+            position: absolute;
+        }
+
+        .message {
+            display: none;
+            font-size: 2rem;
+            color: #fff;
+            margin-top: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff5f5d;
+            transform: rotate(-45deg);
+            animation: floatUp 5s infinite ease-in-out;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff5f5d;
+            border-radius: 50%;
+        }
+
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 10px;
+            top: 0;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(-45deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(-45deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .question {
+                font-size: 2rem;
+            }
+
+            button {
+                font-size: 1.2rem;
+                padding: 8px 15px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="question">Will you go out with me Ankita? ❤️</div>
+        <div class="buttons">
+            <button id="yes">Yes</button>
+            <button id="no">No</button>
+        </div>
+        <div class="message">Yay!  ! ❤️</div>
+    </div>
+
+    <script>
+        const noButton = document.getElementById('no');
+        const yesButton = document.getElementById('yes');
+        const message = document.querySelector('.message');
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            document.body.appendChild(heart);
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            heart.style.left = `${x}px`;
+            heart.style.top = `${y}px`;
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        setInterval(createHeart, 500);
+
+        noButton.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
+        });
+
+        yesButton.addEventListener('click', () => {
+            message.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
